@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudDent · Caja y Finanzas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #1e293b; }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-300 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+  
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-slate-950 border-r border-slate-800 flex flex-col p-4">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="bg-cyan-600 p-2 rounded-lg shadow-lg">
+        <i data-lucide="tooth" class="w-5 h-5 text-white"></i>
+      </div>
+      <span class="text-xl font-bold tracking-tight text-white">Cloud<span class="text-cyan-400">Dent</span></span>
+    </div>
+    <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 mb-6 flex items-center gap-3">
+      <img src="https://ui-avatars.com/api/?name=Ana+T&background=0D9488&color=fff&bold=true" alt="Avatar" class="w-9 h-9 rounded-full border-2 border-cyan-500/50">
+      <div>
+        <p class="text-sm font-semibold text-white">Dra. Ana Torres</p>
+        <p class="text-[10px] text-cyan-300/80">Odontóloga</p>
+      </div>
+    </div>
+    <nav class="flex-1 space-y-1">
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+        <span>Panel Principal</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="calendar-days" class="w-4 h-4"></i>
+        <span>Agenda</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>Pacientes</span>
+      </a>
+      <div class="pt-4 mt-4 border-t border-slate-800"></div>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="stethoscope" class="w-4 h-4"></i>
+        <span>Odontograma</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-cyan-950/30 text-cyan-300 border-l-2 border-cyan-400">
+        <i data-lucide="badge-dollar-sign" class="w-4 h-4"></i>
+        <span>Caja</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO: CAJA -->
+  <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+    
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-white">Caja y Finanzas</h2>
+        <p class="text-slate-400 text-sm mt-1">Control de ingresos, abonos y flujo de caja</p>
+      </div>
+      <div class="flex gap-3">
+        <button class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 transition">
+          <i data-lucide="download" class="w-4 h-4"></i> Exportar Reporte
+        </button>
+        <button class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-lg shadow-emerald-900/30 transition">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i> Registrar Pago
+        </button>
+      </div>
+    </div>
+
+    <!-- Tarjetas de Resumen Financiero -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4">
+        <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Total Ingresos (Oct)</p>
+        <p class="text-3xl font-bold text-white">S/ 18,450</p>
+        <p class="text-emerald-400 text-xs mt-2 flex items-center"><i data-lucide="trending-up" class="w-3 h-3 mr-1"></i> +12.5% vs Sep</p>
+      </div>
+      <div class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4">
+        <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Pendiente por Cobrar</p>
+        <p class="text-3xl font-bold text-amber-400">S/ 3,280</p>
+        <p class="text-slate-400 text-xs mt-2">8 tratamientos en plan de pago</p>
+      </div>
+      <div class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4">
+        <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Ingresos Hoy</p>
+        <p class="text-3xl font-bold text-white">S/ 950</p>
+        <p class="text-slate-400 text-xs mt-2">4 transacciones</p>
+      </div>
+      <div class="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-4">
+        <p class="text-slate-400 text-xs uppercase tracking-wider mb-1">Saldo en Caja</p>
+        <p class="text-3xl font-bold text-emerald-400">S/ 5,240</p>
+        <p class="text-slate-400 text-xs mt-2">Actualizado al cierre de ayer</p>
+      </div>
+    </div>
+
+    <!-- Grid Principal: Transacciones + Resumen por Categoría -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Listado de Transacciones Recientes (2 columnas) -->
+      <div class="lg:col-span-2 bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-5">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-semibold text-white flex items-center gap-2"><i data-lucide="list" class="w-4 h-4 text-cyan-400"></i> Transacciones Recientes</h3>
+          <div class="flex gap-2">
+            <select class="bg-slate-800 border border-slate-700 rounded-lg text-sm text-white px-3 py-1.5">
+              <option>Hoy</option>
+              <option>Esta Semana</option>
+              <option selected>Octubre 2024</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="space-y-2 max-h-[400px] overflow-y-auto pr-1">
+          <!-- Pago Completo -->
+          <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="bg-emerald-950/50 p-2 rounded-lg"><i data-lucide="circle-check" class="w-5 h-5 text-emerald-400"></i></div>
+              <div>
+                <p class="font-semibold text-white">Carlos Rodríguez</p>
+                <p class="text-xs text-slate-400">Limpieza + Evaluación · Pago completo</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-emerald-400">+ S/ 180.00</p>
+              <p class="text-xs text-slate-500">Hoy, 09:45 · Efectivo</p>
+            </div>
+          </div>
+          <!-- Abono Parcial -->
+          <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="bg-amber-950/50 p-2 rounded-lg"><i data-lucide="credit-card" class="w-5 h-5 text-amber-400"></i></div>
+              <div>
+                <p class="font-semibold text-white">María Fernández</p>
+                <p class="text-xs text-slate-400">Ortodoncia · Abono 2/6</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-amber-400">+ S/ 350.00</p>
+              <p class="text-xs text-slate-500">Ayer, 11:20 · Transferencia</p>
+              <p class="text-[10px] text-amber-400/70">Restan S/ 1,400</p>
+            </div>
+          </div>
+          <!-- Pago con Yape/Plin -->
+          <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="bg-purple-950/50 p-2 rounded-lg"><i data-lucide="smartphone" class="w-5 h-5 text-purple-400"></i></div>
+              <div>
+                <p class="font-semibold text-white">Jorge Salas</p>
+                <p class="text-xs text-slate-400">Extracción · Pago completo</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-purple-400">+ S/ 320.00</p>
+              <p class="text-xs text-slate-500">Ayer, 15:30 · Yape</p>
+            </div>
+          </div>
+          <!-- Abono inicial -->
+          <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+              <div class="bg-blue-950/50 p-2 rounded-lg"><i data-lucide="wallet" class="w-5 h-5 text-blue-400"></i></div>
+              <div>
+                <p class="font-semibold text-white">Luisa Márquez</p>
+                <p class="text-xs text-slate-400">Tratamiento Caries + Endo · Abono inicial</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-blue-400">+ S/ 400.00</p>
+              <p class="text-xs text-slate-500">22 Oct, 16:10 · Efectivo</p>
+              <p class="text-[10px] text-blue-400/70">Restan S/ 350</p>
+            </div>
+          </div>
+          <!-- Gasto Operativo -->
+          <div class="bg-slate-900/40 p-4 rounded-xl border border-slate-700/50 flex items-center justify-between opacity-70">
+            <div class="flex items-center gap-4">
+              <div class="bg-red-950/50 p-2 rounded-lg"><i data-lucide="package" class="w-5 h-5 text-red-400"></i></div>
+              <div>
+                <p class="font-semibold text-white">Compra de Insumos</p>
+                <p class="text-xs text-slate-400">Material de restauración</p>
+              </div>
+            </div>
+            <div class="text-right">
+              <p class="text-lg font-bold text-red-400">- S/ 450.00</p>
+              <p class="text-xs text-slate-500">21 Oct, 10:00 · Transferencia</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel Derecho: Resumen y Cierre de Caja -->
+      <div class="space-y-6">
+        
+        <!-- Métodos de Pago -->
+        <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-5">
+          <h3 class="text-md font-semibold text-white mb-4 flex items-center gap-2"><i data-lucide="pie-chart" class="w-4 h-4 text-purple-400"></i> Ingresos por Método</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-2"><span class="w-3 h-3 bg-emerald-500 rounded-full"></span>Efectivo</span>
+              <span class="text-white font-medium">S/ 8,200</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded-full"></span>Transferencia</span>
+              <span class="text-white font-medium">S/ 5,640</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-2"><span class="w-3 h-3 bg-purple-500 rounded-full"></span>Yape / Plin</span>
+              <span class="text-white font-medium">S/ 3,210</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="flex items-center gap-2"><span class="w-3 h-3 bg-amber-500 rounded-full"></span>Tarjeta Crédito</span>
+              <span class="text-white font-medium">S/ 1,400</span>
+            </div>
+            <div class="border-t border-slate-700 pt-2 mt-2">
+              <div class="flex justify-between items-center font-bold">
+                <span class="text-white">Total</span>
+                <span class="text-emerald-400 text-lg">S/ 18,450</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Planes de Pago Activos -->
+        <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-5">
+          <h3 class="text-md font-semibold text-white mb-3 flex items-center gap-2"><i data-lucide="calendar-clock" class="w-4 h-4 text-amber-400"></i> Planes de Pago Activos</h3>
+          <div class="space-y-3">
+            <div class="bg-slate-900/40 p-3 rounded-lg">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-sm font-medium text-white">María Fernández</p>
+                  <p class="text-xs text-slate-400">Ortodoncia · 2/6 cuotas</p>
+                </div>
+                <span class="text-amber-400 font-bold">S/ 1,400</span>
+              </div>
+              <div class="w-full bg-slate-700 h-1.5 rounded-full mt-2">
+                <div class="bg-amber-500 h-1.5 rounded-full" style="width: 33%"></div>
+              </div>
+            </div>
+            <div class="bg-slate-900/40 p-3 rounded-lg">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-sm font-medium text-white">Luisa Márquez</p>
+                  <p class="text-xs text-slate-400">Caries + Endo · 1/2 cuotas</p>
+                </div>
+                <span class="text-amber-400 font-bold">S/ 350</span>
+              </div>
+              <div class="w-full bg-slate-700 h-1.5 rounded-full mt-2">
+                <div class="bg-amber-500 h-1.5 rounded-full" style="width: 53%"></div>
+              </div>
+            </div>
+            <div class="bg-slate-900/40 p-3 rounded-lg">
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-sm font-medium text-white">Roberto Palacios</p>
+                  <p class="text-xs text-slate-400">Implante · 1/12 cuotas</p>
+                </div>
+                <span class="text-amber-400 font-bold">S/ 3,850</span>
+              </div>
+              <div class="w-full bg-slate-700 h-1.5 rounded-full mt-2">
+                <div class="bg-amber-500 h-1.5 rounded-full" style="width: 8%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón Cierre de Caja -->
+        <button class="w-full bg-gradient-to-r from-slate-800 to-slate-900 border border-slate-700 hover:border-cyan-700 text-white p-4 rounded-xl flex items-center justify-between transition group">
+          <span class="flex items-center gap-3">
+            <div class="bg-slate-700 p-2 rounded-lg group-hover:bg-cyan-900/50 transition">
+              <i data-lucide="archive" class="w-5 h-5 text-slate-400 group-hover:text-cyan-400"></i>
+            </div>
+            <div class="text-left">
+              <p class="font-semibold">Cierre de Caja Diario</p>
+              <p class="text-xs text-slate-400">Registrar arqueo y cerrar el día</p>
+            </div>
+          </span>
+          <i data-lucide="chevron-right" class="w-5 h-5 text-slate-500 group-hover:text-cyan-400 transition"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>

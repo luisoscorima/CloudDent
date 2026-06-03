@@ -1,0 +1,22 @@
+# Backend
+backend/target/
+backend/.mvn/wrapper/maven-wrapper.jar
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Env
+.env
+*.log
+
+# IDE
+.idea/
+*.iml
+nbproject/private/
+build/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db

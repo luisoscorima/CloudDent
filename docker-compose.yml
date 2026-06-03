@@ -1,0 +1,53 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: clouddent-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-clouddent}
+      POSTGRES_USER: ${DB_USER:-clouddent}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-clouddent123}
+    ports:
+      - "5432:5432"
+    volumes:
+      - clouddent_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-clouddent} -d ${DB_NAME:-clouddent}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: clouddent-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-clouddent}
+      DB_USER: ${DB_USER:-clouddent}
+      DB_PASSWORD: ${DB_PASSWORD:-clouddent123}
+      JWT_SECRET: ${JWT_SECRET:-CloudDentSecretKeyParaDesarrolloMVP2024Minimo32Chars}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:80}
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 40s
+
+  frontend:
+    build: ./frontend
+    container_name: clouddent-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+
+volumes:
+  clouddent_pgdata:

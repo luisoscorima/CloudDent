@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CloudDent · Agenda Inteligente</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #1e293b; }
+    ::-webkit-scrollbar-thumb { background: #475569; border-radius: 10px; }
+    .cita-card { transition: all 0.15s ease; cursor: pointer; }
+    .cita-card:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-300 antialiased">
+
+<div class="flex h-screen overflow-hidden">
+  
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-slate-950 border-r border-slate-800 flex flex-col p-4">
+    <div class="flex items-center gap-2 mb-8 px-2">
+      <div class="bg-cyan-600 p-2 rounded-lg shadow-lg">
+        <i data-lucide="tooth" class="w-5 h-5 text-white"></i>
+      </div>
+      <span class="text-xl font-bold tracking-tight text-white">Cloud<span class="text-cyan-400">Dent</span></span>
+    </div>
+    <div class="bg-slate-900/60 rounded-xl p-3 border border-slate-800 mb-6 flex items-center gap-3">
+      <img src="https://ui-avatars.com/api/?name=Ana+T&background=0D9488&color=fff&bold=true" alt="Avatar" class="w-9 h-9 rounded-full border-2 border-cyan-500/50">
+      <div>
+        <p class="text-sm font-semibold text-white">Dra. Ana Torres</p>
+        <p class="text-[10px] text-cyan-300/80">Odontóloga</p>
+      </div>
+    </div>
+    <nav class="flex-1 space-y-1">
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
+        <span>Panel Principal</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-cyan-950/30 text-cyan-300 border-l-2 border-cyan-400">
+        <i data-lucide="calendar-days" class="w-4 h-4"></i>
+        <span>Agenda</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="users" class="w-4 h-4"></i>
+        <span>Pacientes</span>
+      </a>
+      <div class="pt-4 mt-4 border-t border-slate-800"></div>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="stethoscope" class="w-4 h-4"></i>
+        <span>Odontograma</span>
+      </a>
+      <a href="#" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
+        <i data-lucide="badge-dollar-sign" class="w-4 h-4"></i>
+        <span>Caja</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- CONTENIDO: AGENDA -->
+  <main class="flex-1 overflow-y-auto p-6 lg:p-8">
+    
+    <!-- Header con Navegación de Semana -->
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-white">Agenda Inteligente</h2>
+        <p class="text-slate-400 text-sm mt-1">Gestiona tus citas de forma rápida y visual</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="flex items-center gap-2 bg-slate-800/50 rounded-lg p-1 border border-slate-700">
+          <button class="p-2 hover:bg-slate-700 rounded-md transition"><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+          <span class="text-white font-medium px-3">21 - 27 Oct, 2024</span>
+          <button class="p-2 hover:bg-slate-700 rounded-md transition"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+        </div>
+        <button class="bg-cyan-600 hover:bg-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center gap-2 shadow-lg shadow-cyan-900/30 transition">
+          <i data-lucide="plus-circle" class="w-4 h-4"></i> Nueva Cita
+        </button>
+      </div>
+    </div>
+
+    <!-- Selector de Vista (Día / Semana / Mes) -->
+    <div class="flex gap-2 mb-6">
+      <button class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium">Día</button>
+      <button class="bg-cyan-600 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-lg shadow-cyan-900/30">Semana</button>
+      <button class="bg-slate-800 text-white px-4 py-2 rounded-lg text-sm font-medium">Mes</button>
+    </div>
+
+    <!-- Grid de Días de la Semana -->
+    <div class="grid grid-cols-7 gap-4">
+      
+      <!-- Lunes 21 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Lun</p>
+          <p class="text-xl font-bold text-white">21</p>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">09:30</p>
+            <p class="text-xs text-slate-300 truncate">C. Rodríguez</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Limpieza</span>
+          </div>
+          <div class="cita-card bg-amber-950/20 border-l-2 border-amber-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">11:00</p>
+            <p class="text-xs text-slate-300 truncate">M. Fernández</p>
+            <span class="text-[9px] text-amber-400 bg-amber-950/50 px-1.5 py-0.5 rounded">Revisión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Martes 22 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Mar</p>
+          <p class="text-xl font-bold text-white">22</p>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">10:00</p>
+            <p class="text-xs text-slate-300 truncate">R. Palacios</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Extracción</span>
+          </div>
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">15:30</p>
+            <p class="text-xs text-slate-300 truncate">J. Salas</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Brackets</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Miércoles 23 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Mié</p>
+          <p class="text-xl font-bold text-white">23</p>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-red-950/20 border-l-2 border-red-500 p-2 rounded-r-lg opacity-60">
+            <p class="text-xs font-medium text-white">09:00</p>
+            <p class="text-xs text-slate-300 truncate">P. Gutiérrez</p>
+            <span class="text-[9px] text-red-400 bg-red-950/50 px-1.5 py-0.5 rounded">Cancelada</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jueves 24 (Día Actual) -->
+      <div class="bg-cyan-950/10 backdrop-blur-sm border border-cyan-700/50 rounded-xl p-3 ring-1 ring-cyan-500/30">
+        <div class="text-center mb-3 pb-2 border-b border-cyan-700/50">
+          <p class="text-xs font-medium text-cyan-400 uppercase">Jue</p>
+          <p class="text-xl font-bold text-cyan-300">24</p>
+          <span class="text-[9px] text-cyan-400 block -mt-1">Hoy</span>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">09:00</p>
+            <p class="text-xs text-slate-300 truncate">C. Rodríguez</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Confirmada</span>
+          </div>
+          <div class="cita-card bg-amber-950/20 border-l-2 border-amber-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">10:30</p>
+            <p class="text-xs text-slate-300 truncate">M. Fernández</p>
+            <span class="text-[9px] text-amber-400 bg-amber-950/50 px-1.5 py-0.5 rounded">En espera</span>
+          </div>
+          <div class="cita-card bg-cyan-950/30 border-l-2 border-cyan-500 p-2 rounded-r-lg bg-gradient-to-r from-cyan-950/20 to-transparent">
+            <p class="text-xs font-medium text-cyan-300">15:00</p>
+            <p class="text-xs text-white truncate">L. Márquez</p>
+            <span class="text-[9px] text-cyan-300 bg-cyan-950/50 px-1.5 py-0.5 rounded">En curso</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Viernes 25 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Vie</p>
+          <p class="text-xl font-bold text-white">25</p>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">08:30</p>
+            <p class="text-xs text-slate-300 truncate">A. Vargas</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Blanqueamiento</span>
+          </div>
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">14:00</p>
+            <p class="text-xs text-slate-300 truncate">L. Paredes</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Implante</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sábado 26 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Sáb</p>
+          <p class="text-xl font-bold text-white">26</p>
+        </div>
+        <div class="space-y-2">
+          <div class="cita-card bg-emerald-950/20 border-l-2 border-emerald-500 p-2 rounded-r-lg">
+            <p class="text-xs font-medium text-white">09:00</p>
+            <p class="text-xs text-slate-300 truncate">F. Rojas</p>
+            <span class="text-[9px] text-emerald-400 bg-emerald-950/50 px-1.5 py-0.5 rounded">Urgencia</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Domingo 27 -->
+      <div class="bg-slate-800/20 backdrop-blur-sm border border-slate-700/50 rounded-xl p-3 opacity-50">
+        <div class="text-center mb-3 pb-2 border-b border-slate-700/50">
+          <p class="text-xs font-medium text-slate-400 uppercase">Dom</p>
+          <p class="text-xl font-bold text-white">27</p>
+        </div>
+        <div class="text-center py-4">
+          <p class="text-xs text-slate-500">Sin citas</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listado Detallado del Día Seleccionado -->
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+        <i data-lucide="list" class="w-4 h-4 text-cyan-400"></i> 
+        Citas del Jueves 24 de Octubre
+      </h3>
+      <div class="bg-slate-800/30 backdrop-blur-sm border border-slate-700/50 rounded-2xl overflow-hidden">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-900/50 border-b border-slate-700">
+            <tr class="text-left text-slate-400 text-xs uppercase">
+              <th class="px-5 py-3">Hora</th>
+              <th class="px-5 py-3">Paciente</th>
+              <th class="px-5 py-3">Tratamiento</th>
+              <th class="px-5 py-3">Estado</th>
+              <th class="px-5 py-3 text-right">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800">
+            <tr class="hover:bg-slate-800/30 transition">
+              <td class="px-5 py-4 font-medium text-white">09:00</td>
+              <td class="px-5 py-4">Carlos Rodríguez</td>
+              <td class="px-5 py-4 text-slate-300">Limpieza + Evaluación</td>
+              <td class="px-5 py-4"><span class="bg-emerald-950/50 text-emerald-300 text-xs px-2 py-1 rounded-full">Confirmada</span></td>
+              <td class="px-5 py-4 text-right">
+                <button class="text-slate-400 hover:text-white mr-3"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                <button class="text-slate-400 hover:text-red-400"><i data-lucide="x-circle" class="w-4 h-4"></i></button>
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-800/30 transition">
+              <td class="px-5 py-4 font-medium text-white">10:30</td>
+              <td class="px-5 py-4">María Fernández</td>
+              <td class="px-5 py-4 text-slate-300">Revisión Ortodoncia</td>
+              <td class="px-5 py-4"><span class="bg-amber-950/50 text-amber-300 text-xs px-2 py-1 rounded-full">En espera</span></td>
+              <td class="px-5 py-4 text-right">
+                <button class="text-slate-400 hover:text-white mr-3"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                <button class="text-slate-400 hover:text-red-400"><i data-lucide="x-circle" class="w-4 h-4"></i></button>
+              </td>
+            </tr>
+            <tr class="bg-cyan-950/10 hover:bg-cyan-950/20 transition border-l-2 border-cyan-500">
+              <td class="px-5 py-4 font-medium text-cyan-300">15:00</td>
+              <td class="px-5 py-4 text-white">Luisa Márquez</td>
+              <td class="px-5 py-4 text-slate-300">Tratamiento Caries 4.4</td>
+              <td class="px-5 py-4"><span class="bg-cyan-950/50 text-cyan-300 text-xs px-2 py-1 rounded-full">En curso</span></td>
+              <td class="px-5 py-4 text-right">
+                <button class="bg-cyan-700 hover:bg-cyan-600 text-white text-xs px-3 py-1.5 rounded-lg transition mr-2">Ver Odontograma</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>lucide.createIcons();</script>
+</body>
+</html>
