@@ -1,5 +1,7 @@
 # CloudDent MVP — Versión 1
 
+UNIVERSIDAD TECNOLÓGICA DEL PERÚ
+
 Sistema web SaaS para clínicas odontológicas. Arquitectura de tres capas:
 
 - **Back-End:** Java 17, Spring Boot 3, Spring Security JWT, Spring Data JPA
