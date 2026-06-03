@@ -64,10 +64,20 @@ Ver [`CONTRIBUTING.md`](CONTRIBUTING.md) para el flujo de cambios y [`docs/CALEN
 ### Despliegue EC2 (primera vez)
 
 1. Instancia Ubuntu con Docker y Docker Compose.
-2. Clonar el repo en `/home/ubuntu/clouddent`.
-3. Copiar `.env.example` → `.env` con valores de producción (`JWT_SECRET`, `DB_PASSWORD`, `CORS_ORIGINS` con la URL pública).
+2. Clonar el repo en `/home/ubuntu/CloudDent`.
+3. Copiar `.env.example` → `.env` con valores de producción (`JWT_SECRET`, `DB_PASSWORD`, `CORS_ORIGINS` con tu dominio o IP pública).
 4. `docker compose up --build -d`
-5. Configurar secrets en GitHub: `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY` (opcional `EC2_APP_DIR`).
+5. Configurar secrets en GitHub: `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY`, `EC2_APP_DIR=/home/ubuntu/CloudDent`.
+
+**Puertos en EC2** (evitan conflicto con Nginx Proxy Manager en 80/443):
+
+| Servicio | Puerto host | Uso |
+|----------|-------------|-----|
+| Frontend | **8086** | Proxy en NPM → `http://localhost:8086` |
+| Backend API | **8092** | Solo si necesitas Swagger directo; la UI usa `/api` vía frontend |
+| PostgreSQL | *(interno)* | No expuesto al host |
+
+En **Nginx Proxy Manager**, crear Proxy Host (ej. `clouddent.tudominio.com`) apuntando a `http://127.0.0.1:8086`.
 
 Los siguientes deploys son automáticos al hacer merge a `main` (script [`scripts/deploy-ec2.sh`](scripts/deploy-ec2.sh)).
 
@@ -101,9 +111,9 @@ cp .env.example .env
 docker compose up --build
 ```
 
-- Frontend: http://localhost
-- API: http://localhost:8080
-- Swagger: http://localhost:8080/swagger-ui.html
+- Frontend: http://localhost:8086
+- API (directa): http://localhost:8092
+- Swagger: http://localhost:8092/swagger-ui.html
 
 ## Desarrollo local
 

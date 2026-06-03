@@ -6,8 +6,6 @@ services:
       POSTGRES_DB: ${DB_NAME:-clouddent}
       POSTGRES_USER: ${DB_USER:-clouddent}
       POSTGRES_PASSWORD: ${DB_PASSWORD:-clouddent123}
-    ports:
-      - "5432:5432"
     volumes:
       - clouddent_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -30,9 +28,9 @@ services:
       DB_PASSWORD: ${DB_PASSWORD:-clouddent123}
       JWT_SECRET: ${JWT_SECRET:-CloudDentSecretKeyParaDesarrolloMVP2024Minimo32Chars}
       JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS:-86400000}
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:80}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,http://localhost:8086}
     ports:
-      - "8080:8080"
+      - "${HOST_BACKEND_PORT:-8092}:8080"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
@@ -47,7 +45,7 @@ services:
       backend:
         condition: service_healthy
     ports:
-      - "80:80"
+      - "${HOST_FRONTEND_PORT:-8086}:80"
 
 volumes:
   clouddent_pgdata:

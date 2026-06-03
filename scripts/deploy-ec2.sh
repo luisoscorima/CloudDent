@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_DIR="${APP_DIR:-/home/ubuntu/clouddent}"
+APP_DIR="${APP_DIR:-/home/ubuntu/CloudDent}"
 BRANCH="${DEPLOY_BRANCH:-main}"
 
 cd "$APP_DIR"
