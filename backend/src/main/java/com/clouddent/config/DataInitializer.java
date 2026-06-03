@@ -13,6 +13,7 @@ import com.clouddent.repository.PacienteRepository;
 import com.clouddent.repository.RolRepository;
 import com.clouddent.repository.UsuarioRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -21,6 +22,7 @@ import java.time.LocalTime;
 import java.util.Set;
 
 @Component
+@Profile("!test")
 public class DataInitializer implements CommandLineRunner {
 
     private final RolRepository rolRepository;

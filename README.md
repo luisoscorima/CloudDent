@@ -1,5 +1,7 @@
 # CloudDent MVP — Versión 1
 
+![CI](https://github.com/luisoscorima/CloudDent/actions/workflows/ci.yml/badge.svg)
+
 Sistema web SaaS para clínicas odontológicas. Arquitectura de tres capas:
 
 - **Back-End:** Java 17, Spring Boot 3, Spring Security JWT, Spring Data JPA
@@ -26,9 +28,56 @@ Sistema web SaaS para clínicas odontológicas. Arquitectura de tres capas:
 CloudDent/
 ├── backend/
 ├── frontend/
+├── .github/workflows/   # CI y CD
+├── docs/                # Calendario de cambios
+├── scripts/             # deploy-ec2.sh
 ├── docker-compose.yml
 └── *.html (mockups de referencia)
 ```
+
+## Pruebas
+
+```bash
+# Backend (JUnit + H2 en memoria, perfil test)
+cd backend && mvn test
+
+# Frontend (Vitest)
+cd frontend && npm test
+```
+
+Cobertura mínima: reglas de negocio (pacientes, citas, JWT), permisos por rol y flujo CRUD de paciente.
+
+## CI/CD
+
+| Workflow | Trigger | Acción |
+|----------|---------|--------|
+| [`ci.yml`](.github/workflows/ci.yml) | Push / PR a `main` | Tests + build backend y frontend |
+| [`deploy.yml`](.github/workflows/deploy.yml) | Push a `main` o manual | Tests → SSH a EC2 → `docker compose up --build` |
+
+### Branch protection (recomendado)
+
+En GitHub → Settings → Branches → `main`:
+
+- Require pull request before merging
+- Require status checks: `backend`, `frontend`
+
+Ver [`CONTRIBUTING.md`](CONTRIBUTING.md) para el flujo de cambios y [`docs/CALENDARIO.md`](docs/CALENDARIO.md) para hitos y ventanas de deploy.
+
+### Despliegue EC2 (primera vez)
+
+1. Instancia Ubuntu con Docker y Docker Compose.
+2. Clonar el repo en `/home/ubuntu/clouddent`.
+3. Copiar `.env.example` → `.env` con valores de producción (`JWT_SECRET`, `DB_PASSWORD`, `CORS_ORIGINS` con la URL pública).
+4. `docker compose up --build -d`
+5. Configurar secrets en GitHub: `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY` (opcional `EC2_APP_DIR`).
+
+Los siguientes deploys son automáticos al hacer merge a `main` (script [`scripts/deploy-ec2.sh`](scripts/deploy-ec2.sh)).
+
+## Control de cambios
+
+- [`CONTRIBUTING.md`](CONTRIBUTING.md) — flujo de ramas y PR
+- [`CHANGELOG.md`](CHANGELOG.md) — registro de cambios (app, infra, docs)
+- [`.github/pull_request_template.md`](.github/pull_request_template.md) — checklist en cada PR
 
 ## Requisitos
 
