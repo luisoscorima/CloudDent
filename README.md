@@ -83,6 +83,27 @@ En **Nginx Proxy Manager**, crear Proxy Host (ej. `clouddent.tudominio.com`) apu
 
 Los siguientes deploys son automáticos al hacer merge a `main` (script [`scripts/deploy-ec2.sh`](scripts/deploy-ec2.sh)).
 
+### Rollback en producción (EC2)
+
+Si un deploy falla el healthcheck, `deploy-ec2.sh` intenta rollback automático al commit anterior.
+
+Rollback manual en el servidor:
+
+```bash
+cd ~/CloudDent
+
+# Al último deploy exitoso (recomendado)
+bash scripts/rollback-ec2.sh
+
+# Al commit previo al último deploy
+bash scripts/rollback-ec2.sh --previous
+
+# A un commit específico
+bash scripts/rollback-ec2.sh abc1234
+```
+
+Los commits estables se guardan en `.deploy/last-good-commit` (no versionado en Git).
+
 ## Control de cambios
 
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — flujo de ramas y PR

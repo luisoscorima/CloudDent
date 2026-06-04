@@ -10,6 +10,9 @@ frontend/dist/
 .env
 *.log
 
+# Deploy EC2 (commits locales de rollback)
+.deploy/
+
 # IDE
 .idea/
 *.iml
