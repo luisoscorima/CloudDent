@@ -70,6 +70,7 @@ Ver [`CONTRIBUTING.md`](CONTRIBUTING.md) para el flujo de cambios y [`docs/CALEN
 3. Copiar `.env.example` → `.env` con valores de producción (`JWT_SECRET`, `DB_PASSWORD`, `CORS_ORIGINS` con tu dominio o IP pública).
 4. `docker compose up --build -d`
 5. Configurar secrets en GitHub: `EC2_HOST`, `EC2_USER`, `EC2_SSH_KEY`, `EC2_APP_DIR=/home/ubuntu/CloudDent`.
+  - Opcional: `EC2_SSH_PORT` si la instancia no expone SSH en el puerto 22.
 
 **Puertos en EC2** (evitan conflicto con Nginx Proxy Manager en 80/443):
 

@@ -46,6 +46,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
+          port: ${{ secrets.EC2_SSH_PORT || 22 }}
           key: ${{ secrets.EC2_SSH_KEY }}
           command_timeout: 20m
           script: |
