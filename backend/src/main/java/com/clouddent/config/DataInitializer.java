@@ -48,22 +48,22 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (rolRepository.count() > 0) {
-            return;
-        }
-
-        Rol adminRol = crearRol(NombreRol.ADMINISTRADOR);
-        Rol odontoRol = crearRol(NombreRol.ODONTOLOGO);
-        Rol recepRol = crearRol(NombreRol.RECEPCIONISTA);
+        Rol adminRol = obtenerOCrearRol(NombreRol.ADMINISTRADOR);
+        Rol odontoRol = obtenerOCrearRol(NombreRol.ODONTOLOGO);
+        Rol recepRol = obtenerOCrearRol(NombreRol.RECEPCIONISTA);
 
         String password = passwordEncoder.encode("Admin123!");
 
-        Usuario admin = crearUsuario("admin", password, "Carlos", "Mendoza",
+        Usuario admin = obtenerOCrearUsuario("admin", password, "Carlos", "Mendoza",
                 "admin@clouddent.com", Set.of(adminRol));
-        Usuario odonto = crearUsuario("odontologo", password, "Ana", "Torres",
+        Usuario odonto = obtenerOCrearUsuario("odontologo", password, "Ana", "Torres",
                 "ana@clouddent.com", Set.of(odontoRol));
-        Usuario recep = crearUsuario("recepcionista", password, "María", "López",
+        Usuario recep = obtenerOCrearUsuario("recepcionista", password, "María", "López",
                 "maria@clouddent.com", Set.of(recepRol));
+
+        if (pacienteRepository.count() > 0) {
+            return;
+        }
 
         Paciente p1 = crearPaciente("Luisa", "Márquez", "45678901",
                 "987654321", "luisa@email.com", LocalDate.of(1990, 5, 15));
@@ -88,11 +88,22 @@ public class DataInitializer implements CommandLineRunner {
                 "Extracción cordal", p1, odonto, null);
     }
 
+        private Rol obtenerOCrearRol(NombreRol nombre) {
+                return rolRepository.findByNombre(nombre)
+                                .orElseGet(() -> crearRol(nombre));
+        }
+
     private Rol crearRol(NombreRol nombre) {
         Rol rol = new Rol();
         rol.setNombre(nombre);
         return rolRepository.save(rol);
     }
+
+        private Usuario obtenerOCrearUsuario(String username, String password, String nombres,
+                                                                                 String apellidos, String email, Set<Rol> roles) {
+                return usuarioRepository.findByUsername(username)
+                                .orElseGet(() -> crearUsuario(username, password, nombres, apellidos, email, roles));
+        }
 
     private Usuario crearUsuario(String username, String password, String nombres,
                                String apellidos, String email, Set<Rol> roles) {
